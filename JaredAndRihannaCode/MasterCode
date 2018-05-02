@@ -1,0 +1,72 @@
+>>> from sklearn.feature_extraction.text import CountVectorizer
+>>> data = []
+>>> data_labels = []
+>>> 
+>>> with open("./IMDB1noIDs.txt") as f:
+...     for i in f:
+...         data.append(i)
+...         data_labels.append('pos')
+... 
+>>> with open("./IMDB0noIDs.txt") as f:
+...     for i in f:
+...         data.append(i)
+...         data_labels.append('neg')
+... 
+>>> vectorizer = CountVectorizer(
+...     analyzer = 'word',
+...     lowercase = False,
+... )
+>>> features = vectorizer.fit_transform(
+...     data
+... )
+features_nd = features.toarray()
+
+>>> 
+>>> from sklearn.model_selection import train_test_split
+>>> X_train, X_test, y_train, y_test  = train_test_split(
+...         features_nd, 
+...         data_labels,
+...         train_size=0.80, 
+...         random_state=1234)
+
+
+>>> 
+>>> 
+>>> from sklearn.linear_model import LogisticRegression
+>>> log_model = LogisticRegression()
+>>> log_model = log_model.fit(X=X_train, y=y_train)
+
+
+>>> 
+>>> 
+>>> y_pred = log_model.predict(X_test)
+>>> import random
+>>> j = random.randint(0,len(X_test)-7)
+>>> for i in range(j,j+7):
+...     print(y_pred[0])
+...     ind = features_nd.tolist().index(X_test[i].tolist())
+...     print(data[ind].strip())
+...
+
+#below is a sampling of the classified data, this is what takes it a long time to process
+
+neg
+1	Mr. Blandings Builds His Dream House may be the best Frank Capra/Preston Sturges movie neither man ever made! If you love Bringing Up Baby, The Philadelpia Story, The Thin Man, I Was A Male War Bride or It's a Wonderful Life - movies made with wit, taste and and the occasional tongue firmly panted in cheek, check this one out. Post WWII life is simply and idyllically portrayed.<br /><br />Grant is at the absolute top of his form playing the city mouse venturing into the life of a country squire. Loy is adorable as his pre-NOW wife. The cast of supporting characters compares to You Can't Take It With You and contains an early bit by future Tarzan Lex Barker. Art Direction and Editing are way above par.<br /><br />The movie never stoops to the low-rent, by-the-numbers venal slapstick of the later adaptation The Money Pit.
+neg
+0	...and it is this film. I imagine that if indeed there is a negative afterlife, damned souls are tied to a rather uncomfortable couch and forced to watch this movie on a continuous loop for all eternity. <br /><br />Okay, maybe it's not that bad, but it is probably the worst film I have ever seen next to \Manos, the Hands of Fate\"... and I have seen a lot of bad movies, believe you me. <br /><br />This is just a crummy B movie, bad film-making at it's finest(or is it worst?) The thing I really didn't like about this movie is the moronic duo they threw in for comedy relief. Now, a little comedy relief is a good thing, but most of the movie is focused on the adventures of these two morons, rather than on the \"heroes\" of this film, who are actually in it for less time than them! <br /><br />To be fair, Crown International really destroyed the movie by adding bad music and doing a poor job editing. But honestly, this was probably a bad film to begin with, so Crown really couldn't have done that much to hurt it. <br /><br />This really needs to be in the bottom 100 list. I wouldn't wish this one on my worst enemy. <br /><br />Actually, it's my kind of campy B movie. It was bad, but I still liked it, despite my one star rating."
+neg
+1	Paul (Jason Lee) is an underachiever who just happens to be engaged to a type-A princess named Karen (Selma Blair). She chooses his clothes and his daily schedule. At his bachelor party, Paul gets a little too drunk and somehow ends up taking a pretty dancer named Becky (Julia Stiles) back to his digs. \Nothing happened\", as they say, but the duo do wake up in the same bed. Suddenly Karen telephones. She's on her way to Paul's apartment. Understandably, Paul hustles Becky out of the place, although her underpants are left behind. But, there is even more fun ahead. At a family dinner at Karen's parents' home, Paul runs smack into Becky again, learning that she is Karen's cousin. Talk about some explaining to do! But, instead, Paul chooses to feign a stomach problem and hides out in the bathroom. Will Karen ever find out that Becky spent the night at Paul's place? And, what will be the consequences? I'm sorry for critics who pan movies like this. They should definitely lighten up, for this film is fresh and fun. Of course, it doesn't hurt matters that Lee is a consummate funny man, Stiles is a charming beauty or that Blair is a natural as a pretty but anal fiancée. The rest of the cast, including James Brolin and Julie Haggerty, is also quite nice. The look of the film is wonderful, as are the costumes and California settings. Best of all, the script is imaginative and inspired, creating big laughs for the audience. In short, if you want to tickle the proverbial funnybones, get this movie tonight. It may not be Academy Award material but it is absolutely guaranteed to turn a bad day into a darn good one."
+neg
+1	This is a kind of movie that will stay with you for a long time. Soha Ali and Abhay Deol both look very beautiful. Soha reminds you so much of her mother Sharmila Tagore. Abhay is a born actor and will rise a lot in the coming future.<br /><br />The ending of the movie is very different from most movies. In a way you are left unsatisfied but if you really think about it in real terms, you realize that the only sensible ending was the ending shown in the movie. Otherwise, it would have been gross injustice to everyone. <br /><br />The movie is about a professional witness who comes across a girl waiting to get married in court. Her boyfriend does not show up and she ends up being helped by the witness. Slowly slowly, over the time, he falls in love for her. It is not clear if she has similar feelings for him or not. Watch the movie for complete details. <br /><br />The movie really belongs to Abhay. I look forward to seeing more movies from him. Soha is pretty but did not speak much in the movie. Her eyes, her innocence did most of the talking.
+neg
+0	Shocking!<br /><br />In 1965 I saw Jury Gagarin alive. He was sincere, unpretentious and kindly, he was at ease and looked like well-educated and intellectual person. In this movie I saw a clown! The actor looks like dummy with affected gestures and mimicry. They made a cartoon! The real Gagarin was someone else! Don't believe in this movie!<br /><br />I saw this movie after the movies like \Taming of Fire\" and \"Apollo 13\" and after reading books \"Rockets and People\" by Chertok and \"Korolev: Myths and Facts\" by Golovanov. I was shocked by tiresome scenario, poor acting and producing, and a lots of inexactitudes of \"Space Race\".<br /><br />The movie is the tedious rendering of well-known in Russia historical facts. A lots of interesting known facts of the space projects was not demonstrated. Some facts and details were perverted. For example, in 1945 Korolev was already not a prisoner (liberated in 1944), and in 1940 he was already not in Kolyma prison gold mine, but in special prison design bureau. Korolev was the designer in prison design bureau and he was not buried the dead prisoners. But in the movie Korolev worked as grave digger after 1940 (because jailer have shoulder straps on uniform). IMHO, the authors of movie have no profound knowledge about this part of the history and they can't to make interesting movies."
+neg
+0	I don't think this is too bad of a show under the right conditions. I tolerated the first season.<br /><br />Unfortunately, this is a show about lawyers who aren't really lawyers. God forbid anybody actually go to law school based on these shows, which I had heard was the case when I watched some interviews of the show. It just made me gag a bit.<br /><br />That aside, Spader and Shatner, who are supposed to be the stars of the show, are the most annoying. While this might be a compliment in some situations, it's certainly not here. Their constantly harassing the women on the show is funny at first. But since that's what they're doing literally all the time, I've realized that this is as deep as the show is going to get. Trying to intersperse some serious, dramatic, and even tear-jerking moments in the middle of this mockery of a real show fails to compensate for the progressive loss of interest I've been experiencing trying to enjoy the show.<br /><br />Alan Shore's flamboyant and gratuitous \public service announcements\" where he spouts off his opinions do not impress. Denny Crane is just annoying. I was embarrassed for him and for the writers of the show for Crane's speech wearing a colonial outfit.<br /><br />I'm giving two stars because there are moments where I thought the show's attempts to deal with some contemporary issues were done with care.<br /><br />I think the show's writers became aware that the sexual harassment displayed by Denny and Alan was getting overbearing even to those who were more inviting of them from the start. The thing is, I don't care if the sexual harassment treatment in the show is done well, but I just felt that the writer was insulting me with artificially implanting sexual banters all over the show in the hopes that my libido will keep me coming back for more. I'm not a teenager anymore, and I think this show is promising if its goal wasn't to cater to the lowest common denominator to get ratings.<br /><br />Of course, I'm writing this after I realized that it's really not gonna get much better than this. It's a shame because it's one of those shows I'd love to love."
+neg
+1	I grew up watching, and loving this cartoon every year. I didn't think they would be able to take a half hour (20 min!) cartoon and make it a movie. They did it. With FLYING COLOURS! Fabulous, funny, heart warming, effective movie!
+>>> 
+>>> 
+>>> from sklearn.metrics import accuracy_score
+>>> print(accuracy_score(y_test, y_pred))
+0.8818
+>>> 

@@ -1,0 +1,2065 @@
+Alllll of my notes + internal monologue.
+
+
+
+#https://en.wikipedia.org/wiki/The_Mother_of_All_Demos
+#https://software-carpentry.org/lessons/
+#http://guides.beanstalkapp.com/version-control/common-git-commands.html
+#https://product.hubspot.com/blog/git-and-github-tutorial-for-beginners
+#https://unt-libraries.github.io/2018-01-26-unt-swc/
+#
+
+
+
+
+
+#DAY ONE
+#IN ORDER! NOT PYTHON FIRST. ALL IN BASH.
+
+########################################
+
+#to get rid of info before prompt, replaces it all with $
+PS1='$ '
+
+#to find the username of the computer
+whoami
+
+########################################
+#present working directory...where you are.  IMPORTANT. USE THIS OFTEN.
+pwd
+
+
+
+#? not the same diagram for my laptop.../users/rhiannalavalla
+
+                    root
+    ------------------------------------
+    |           |          |           |
+  bin         data       users       tmp
+
+
+#list directory/tool....shows you your files?
+ls
+
+#you can add a *flag* to ls...
+ls -F
+#-F puts a slash behind all of the folders. You can read files, not folders.
+
+man --ls #(?)
+
+#the -h gives you a human readable format, shows bytes. CAN combine flags. -l -h =-lh
+ls -lh
+
+#stands for manual, SO MANY OPTIONS
+man ls
+
+#to see whats in a specific folder
+ls -lh Desktop
+
+#to move into a specific area
+cd Desktop
+
+##########################################################
+############NEED TO DO THIS STEP!!!!!!!!!#################
+##########################################################
+#paste that git clone
+
+#git is already on macs? I think?
+git clone https: // github.com / unt - libraries / swc - files.git
+
+######THEN cd to change into the swc-files directory. IF YOU DON'T DO CD, IT WON'T CHANGE
+
+cd /Users/rhiannalavalla/Desktop/swc-files
+
+
+$ pwd
+/Users/rhiannalavalla/Desktop/swc-files
+
+$ cd swc-files
+-bash: cd: swc-files: No such file or directory
+
+$ pwd
+/Users/rhiannalavalla/Desktop/swc-files
+
+$ ls -F
+data-shell/			python-novice-inflammation/
+
+$ pwd
+/Users/rhiannalavalla/Desktop/swc-files
+
+$ cd data-shell
+
+$ pwd
+/Users/rhiannalavalla/Desktop/swc-files/data-shell
+
+$ ls -F
+creatures/		molecules/		notes.txt		solar.pdf
+data/			north-pacific-gyre/	pizza.cfg		writing/
+
+$ cd data
+
+$ pwd
+/Users/rhiannalavalla/Desktop/swc-files/data-shell/data
+
+$ ls -F
+amino-acids.txt		animals.txt		morse.txt		planets.txt		sunspot.txt
+animal-counts/		elements/		pdb/			salmon.txt
+
+$ ls
+amino-acids.txt	animals.txt	morse.txt	planets.txt	sunspot.txt
+animal-counts	elements	pdb		salmon.txt
+
+$ cd data-shell
+-bash: cd: data-shell: No such file or directory
+#^^^^ you should get that error because there is no such file
+
+
+############################
+
+
+$ pwd
+/Users/rhiannalavalla/Desktop/swc-files/data-shell/data
+
+#.. moves BACK up a level
+$ cd ..
+
+$ pwd
+/Users/rhiannalavalla/Desktop/swc-files/data-shell
+
+$ ls
+creatures		molecules		notes.txt		solar.pdf
+data			north-pacific-gyre	pizza.cfg		writing
+
+$ ls -F
+creatures/		molecules/		notes.txt		solar.pdf
+data/			north-pacific-gyre/	pizza.cfg		writing/
+
+
+#The -a shows HIDDEN files/commands.
+$ ls -F -a
+./			creatures/		north-pacific-gyre/	solar.pdf
+../			data/			notes.txt		writing/
+.bash_profile		molecules/		pizza.cfg
+
+
+#this SHOWS whats up a level, but doesn't actually move you up a level.
+ls ..
+
+#takes you back to your home directory
+cd
+
+pwd
+/Users/rhiannalavalla
+
+
+###############################################
+
+#now, we're going back down into the files but all in one command. You can stack files with /
+$ cd Desktop/swc-files/data-shell/data/
+$ pwd
+/Users/rhiannalavalla/Desktop/swc-files/data-shell/data
+
+
+#what we've been doing are relative paths, NOT absolute paths. Absolute paths are the FULL paths, the entire way. THERE'S A DIFFERENCE.
+
+
+
+#~ means start the command at the users current home directory (?)
+
+
+$ cd ~/Desktop/swc-files/data-shell/data/
+#^^^so we skipped tying users and rhiannalavalla
+$ pwd
+/Users/rhiannalavalla/Desktop/swc-files/data-shell/data
+
+#takes you back to where you were previously
+cd -
+
+
+#play with it
+$ cd ..
+$ pwd
+/Users/rhiannalavalla/Desktop/swc-files/data-shell
+$ cd -
+/Users/rhiannalavalla/Desktop/swc-files/data-shell/data
+
+$ cd ../../
+$ pwd
+/Users/rhiannalavalla/Desktop/swc-files
+
+
+
+#shows whats in current location
+$ ls -lh
+total 208
+-rw-r--r--    1 rhiannalavalla  staff   283B Jan 26 09:59 amino-acids.txt
+drwxr-xr-x    3 rhiannalavalla  staff    96B Jan 26 09:59 animal-counts
+-rw-r--r--    1 rhiannalavalla  staff   136B Jan 26 09:59 animals.txt
+drwxr-xr-x  105 rhiannalavalla  staff   3.3K Jan 26 09:59 elements
+-rw-r--r--    1 rhiannalavalla  staff   554B Jan 26 09:59 morse.txt
+drwxr-xr-x   50 rhiannalavalla  staff   1.6K Jan 26 09:59 pdb
+-rw-r--r--    1 rhiannalavalla  staff   8.7K Jan 26 09:59 planets.txt
+-rw-r--r--    1 rhiannalavalla  staff    45B Jan 26 09:59 salmon.txt
+-rw-r--r--    1 rhiannalavalla  staff    72K Jan 26 09:59 sunspot.txt
+$ ls -t
+sunspot.txt	planets.txt	morse.txt	animals.txt	amino-acids.txt
+salmon.txt	pdb		elements	animal-counts
+
+#-lht sorts....ALL of this is covered in the man pages
+$ ls -lht
+total 208
+-rw-r--r--    1 rhiannalavalla  staff    72K Jan 26 09:59 sunspot.txt
+-rw-r--r--    1 rhiannalavalla  staff    45B Jan 26 09:59 salmon.txt
+-rw-r--r--    1 rhiannalavalla  staff   8.7K Jan 26 09:59 planets.txt
+drwxr-xr-x   50 rhiannalavalla  staff   1.6K Jan 26 09:59 pdb
+-rw-r--r--    1 rhiannalavalla  staff   554B Jan 26 09:59 morse.txt
+drwxr-xr-x  105 rhiannalavalla  staff   3.3K Jan 26 09:59 elements
+-rw-r--r--    1 rhiannalavalla  staff   136B Jan 26 09:59 animals.txt
+drwxr-xr-x    3 rhiannalavalla  staff    96B Jan 26 09:59 animal-counts
+-rw-r--r--    1 rhiannalavalla  staff   283B Jan 26 09:59 amino-acids.txt
+$
+
+
+
+
+##########################
+####Took break############
+##########################
+
+
+
+
+#To make a new FOLDER in your current directory, us mkdir + new folder name
+mkdir thesis
+
+
+
+$ ls -F
+creatures/		molecules/		notes.txt		solar.pdf		writing/
+data/			north-pacific-gyre/	pizza.cfg		thesis/
+$ ls -F thesis/
+$ cd thesis
+$ pwd
+/Users/rhiannalavalla/Desktop/swc-files/data-shell/thesis
+$ nano draft.txt
+
+#nano is a text editor, but seems to be super accessible with cmd.
+
+#type the below...
+It's not "publish or perish" any more,
+it's "share and thrive".
+
+#then,
+control x #to exit
+#then Y for save, and enter to save as that file name.
+
+$ ls
+draft.txt
+
+#that's one way to create a file.
+
+
+
+cd
+touch my_file.txt
+ls
+ls -lh
+
+#touch is another way to make a file, but isn't as useful to me. Touch doesn't open immediately like nano, it just creates the file, that's it.
+
+#rm = remove. Deletes the file
+rm draft.txt
+
+ #now make the file again...
+ nano draft.txt
+
+#type in the same text...
+
+It's not "publish or perish" any more,
+it's "share and thrive".
+
+
+$ cd ..
+$ rm thesis/
+rm: thesis/: is a directory
+
+#rm can ONLY remove files, not directories. There ARE some checks and balances to make sure you don't delete something you didn't intend to.
+
+rm -r thesis/
+#the -r flag allows you to remove directories. Do. Not. Use. This. Unless you're 100% sure you want it gone forever.
+
+
+
+$ ls
+creatures		molecules		notes.txt		solar.pdf
+data			north-pacific-gyre	pizza.cfg		writing
+$ mkdir thesis
+$ cd thesis/
+$ pwd
+/Users/rhiannalavalla/Desktop/swc-files/data-shell/thesis
+$ nano draft.txt
+#type some random text in the new draft.txt
+
+#the -i flag is interactive mode. Will ask you if you really wanna delete it. Response is y or n.
+$ rm -i draft.txt
+remove draft.txt? n
+$ ls
+draft.txt
+$ rm -i draft.txt
+remove draft.txt? y
+$ ls
+$
+
+$ pwd
+/Users/rhiannalavalla/Desktop/swc-files/data-shell/thesis
+$ nano draft.txt
+$ ls
+draft.txt
+$ cd ..
+$ ls thesis/
+draft.txt
+
+#to rename a file, mv = move, you're not really moving it, just keeping it in the same spot with a new name. You CAN move and rename at the same time tho.
+$ mv thesis/draft.txt thesis/quotes.txt
+$
+
+$ ls thesis/
+quotes.txt
+
+
+
+$ ls -lh
+total 64
+drwxr-xr-x   4 rhiannalavalla  staff   128B Jan 26 09:59 creatures
+drwxr-xr-x  11 rhiannalavalla  staff   352B Jan 26 09:59 data
+drwxr-xr-x   8 rhiannalavalla  staff   256B Jan 26 09:59 molecules
+drwxr-xr-x   3 rhiannalavalla  staff    96B Jan 26 09:59 north-pacific-gyre
+-rw-r--r--   1 rhiannalavalla  staff    86B Jan 26 09:59 notes.txt
+-rw-r--r--   1 rhiannalavalla  staff    32B Jan 26 09:59 pizza.cfg
+-rw-r--r--   1 rhiannalavalla  staff    21K Jan 26 09:59 solar.pdf
+drwxr-xr-x   3 rhiannalavalla  staff    96B Jan 26 10:59 thesis
+drwxr-xr-x   6 rhiannalavalla  staff   192B Jan 26 09:59 writing
+$ cd thesis/
+$ ls
+quotes.txt
+$ pwd
+/Users/rhiannalavalla/Desktop/swc-files/data-shell/thesis
+$ ls
+quotes.txt
+
+#cp = copy, makes a new file, identical, IN the same place.
+$ cp quotes.txt quotations.txt
+$ ls
+quotations.txt	quotes.txt
+$ rm quotes.txt
+$
+$ ls quotations.txt quotes.txt
+ls: quotes.txt: No such file or directory
+quotations.txt
+$
+
+
+
+$ nano statistics  #WITHOUT .txt
+$ ls
+quotations.txt	statistics
+$
+$ ls -F
+quotations.txt	statistics
+$ mv statistics statistics.txt
+$ ls
+quotations.txt	statistics.txt
+$
+
+$ cd ..
+$ ls
+creatures		molecules		notes.txt		solar.pdf		writing
+data			north-pacific-gyre	pizza.cfg		thesis
+$ pwd
+/Users/rhiannalavalla/Desktop/swc-files/data-shell
+$ cd data/
+$ ls
+amino-acids.txt	animals.txt	morse.txt	planets.txt	sunspot.txt
+animal-counts	elements	pdb		salmon.txt
+$ mkdir recombine
+$ mv morse.txt recombine/
+$ cp recombine/morse.txt recombine/morse-saved.txt
+$ mv recombine/morse.txt .
+$ ls recombine/
+morse-saved.txt
+$
+
+
+
+
+
+##############################
+
+
+
+
+
+#abbreviations, things to know,
+cp #=copy
+mkdir asdfadf # =make new directory
+mv old new #= move
+rm cat  #=remove
+
+
+
+
+
+
+
+##############################
+#moving on to pipes...
+
+
+
+
+wc *.pdb
+#this is saying you wanna run the wc (word count) program on ALL of the .pdb files.
+
+
+
+
+
+$ cd
+$ pwd
+/Users/rhiannalavalla
+$ cd Desktop/swc-files/data-shell/molecules/
+$ ls
+cubane.pdb	ethane.pdb	methane.pdb	octane.pdb	pentane.pdb	propane.pdb
+$ wc *.pdb
+      20     156    1158 cubane.pdb
+      12      84     622 ethane.pdb
+       9      57     422 methane.pdb
+      30     246    1828 octane.pdb
+      21     165    1226 pentane.pdb
+      15     111     825 propane.pdb
+     107     819    6081 total
+#Samples     words   characters
+
+#######
+wc *.pdb
+#this is saying you wanna run the wc (word count) program on ALL of the .pdb files.
+
+
+$ wc pentane.pdb propane.pdb
+      21     165    1226 pentane.pdb
+      15     111     825 propane.pdb
+      36     276    2051 total
+#you can manually write in all of the names, orrr....
+
+$ wc p*.pdb
+      21     165    1226 pentane.pdb
+      15     111     825 propane.pdb
+      36     276    2051 total
+ # you can use the wild card *, and do p*.pdb (or whatever starting letter you wanna look for)
+
+$ wc p?.pdb
+wc: p?.pdb: open: No such file or directory
+$ wc p???ane.pdb
+      21     165    1226 pentane.pdb
+      15     111     825 propane.pdb
+      36     276    2051 total
+#the ? is a ONE character wild card.
+
+
+# -l shows ONLY number of lines, gets rid of the rest of the things. -w = number of words only, -c = number of characters only
+$ wc -l *.pdb
+      20 cubane.pdb
+      12 ethane.pdb
+       9 methane.pdb
+      30 octane.pdb
+      21 pentane.pdb
+      15 propane.pdb
+     107 total
+$
+
+
+
+
+
+
+#>   this symbol says take the output of this, and redirect it into X file (type name.)
+$ wc -l *.pdb > lengths.txt
+$ ls -F
+cubane.pdb	ethane.pdb	lengths.txt	methane.pdb	octane.pdb	pentane.pdb	propane.pdb
+$
+
+
+#cat = concatenate
+$ cat lengths.txt
+      20 cubane.pdb
+      12 ethane.pdb
+       9 methane.pdb
+      30 octane.pdb
+      21 pentane.pdb
+      15 propane.pdb
+     107 total
+#sort by number = sort -n Xname
+$ sort -n lengths.txt
+       9 methane.pdb
+      12 ethane.pdb
+      15 propane.pdb
+      20 cubane.pdb
+      21 pentane.pdb
+      30 octane.pdb
+     107 total
+$
+
+#sort by itself is alphabetical
+
+
+$ sort -n lengths.txt > sorted-lengths.txt
+$ head -n 1 sorted-lengths.txt
+       9 methane.pdb
+$
+#head -n 1 shows you the VERY first row. say you did head -n 5, it would show you the first 5 rows.
+#automatically, head always gives you the top 10 rows.
+
+
+#On to pipe! |
+
+
+
+$ sort -n lengths.txt | head -n 1
+       9 methane.pdb
+$
+
+
+#tail is the opposite
+$ sort -n lengths.txt | tail -n 1
+     107 total
+
+
+
+# the pipe is handy because you don't need to create a file. This does the same thing, without the file creation.
+$ wc -l *.pdb | sort -n
+       9 methane.pdb
+      12 ethane.pdb
+      15 propane.pdb
+      20 cubane.pdb
+      21 pentane.pdb
+      30 octane.pdb
+     107 total
+$
+
+
+#to sort AND show the first row at the same time...
+$ wc -l *.pdb | sort -n | head -n 1
+       9 methane.pdb
+$
+
+
+
+
+
+
+
+
+
+
+
+
+#########IDK what happened here, but you need to be in the 2012-07-03 file....
+$ cd Desktop/swc-files/data-shell/north-pacific-gyre/
+$ ls
+2012-07-03
+$ ls -lh
+total 0
+drwxr-xr-x  21 rhiannalavalla  staff   672B Jan 26 09:59 2012-07-03
+$ ls
+2012-07-03
+$ cd
+$ cd Desktop/swc-files/data-shell/north-pacific-gyre/
+$ cd Desktop/swc-files/data-shell/north-pacific-gyre/2012-07-03/
+-bash: cd: Desktop/swc-files/data-shell/north-pacific-gyre/2012-07-03/: No such file or directory
+$ ls
+2012-07-03
+$ ls 2012-07-03/
+NENE01729A.txt	NENE01751A.txt	NENE01843A.txt	NENE01978A.txt	NENE02040A.txt	NENE02043A.txt	goostats
+NENE01729B.txt	NENE01751B.txt	NENE01843B.txt	NENE01978B.txt	NENE02040B.txt	NENE02043B.txt
+NENE01736A.txt	NENE01812A.txt	NENE01971Z.txt	NENE02018B.txt	NENE02040Z.txt	goodiff
+$ pwd
+/Users/rhiannalavalla/Desktop/swc-files/data-shell/north-pacific-gyre
+$ cd 2012-07-03/
+$ ls
+NENE01729A.txt	NENE01751A.txt	NENE01843A.txt	NENE01978A.txt	NENE02040A.txt	NENE02043A.txt	goostats
+NENE01729B.txt	NENE01751B.txt	NENE01843B.txt	NENE01978B.txt	NENE02040B.txt	NENE02043B.txt
+NENE01736A.txt	NENE01812A.txt	NENE01971Z.txt	NENE02018B.txt	NENE02040Z.txt	goodiff
+$
+
+
+
+
+
+
+
+$ wc -l *.txt
+     300 NENE01729A.txt
+     300 NENE01729B.txt
+     300 NENE01736A.txt
+     300 NENE01751A.txt
+     300 NENE01751B.txt
+     300 NENE01812A.txt
+     300 NENE01843A.txt
+     300 NENE01843B.txt
+     300 NENE01971Z.txt
+     300 NENE01978A.txt
+     300 NENE01978B.txt
+     240 NENE02018B.txt
+     300 NENE02040A.txt
+     300 NENE02040B.txt
+     300 NENE02040Z.txt
+     300 NENE02043A.txt
+     300 NENE02043B.txt
+    5040 total
+$ wc -l *.txt | sort -n | head -n 5
+     240 NENE02018B.txt
+     300 NENE01729A.txt
+     300 NENE01729B.txt
+     300 NENE01736A.txt
+     300 NENE01751A.txt
+$
+$ wc -l *.txt | sort -n | tail -n 5
+     300 NENE02040B.txt
+     300 NENE02040Z.txt
+     300 NENE02043A.txt
+     300 NENE02043B.txt
+    5040 total
+$
+
+
+#wildcards are super useful to pick out certain letters you're sorting through. Naming patterns are super handy as well because it makes it easier to sort.
+
+$ ls *Z.txt
+NENE01971Z.txt	NENE02040Z.txt
+$
+
+$ ls *A.txt
+NENE01729A.txt	NENE01751A.txt	NENE01843A.txt	NENE02040A.txt
+NENE01736A.txt	NENE01812A.txt	NENE01978A.txt	NENE02043A.txt
+$
+
+
+
+
+
+
+#cat = concatenate
+#head = top of the list
+#tail = end of the list
+#wc = word count
+#sort = sorts shit..
+# * = wildcard for everything
+# ? = SINGLE character
+# > = redirects to new/other file
+# | = routes to next file, on and on etc.
+
+
+
+
+
+
+
+
+
+
+
+####################################
+#####POST LUNCH PYTHON SESH#########
+####################################
+
+
+
+#they're using jupyter but pycham over here.
+
+
+
+
+
+
+
+| => PS1='$ '
+$ cd
+$ cd Desktop/swc-files/python-novice-inflammation/data/
+$ ls
+inflammation-01.csv	inflammation-04.csv	inflammation-07.csv	inflammation-10.csv	small-01.csv
+inflammation-02.csv	inflammation-05.csv	inflammation-08.csv	inflammation-11.csv	small-02.csv
+inflammation-03.csv	inflammation-06.csv	inflammation-09.csv	inflammation-12.csv	small-03.csv
+$ nano inflammation-01.csv
+$ python
+
+
+
+weight_kg = 55
+print(weight_kg)
+#55
+print('weight in pounds:', 2.2 * weight_kg)
+#weight in pounds: 121.00000000000001
+weight_kg = 57.5
+print('weight in kg is now:', weight_kg)
+#weight in kg is now: 57.5
+weight_lb = 2.2 * weight_kg
+print('weight in kg:', weight_kg, 'and in pounds:', weight_lb)
+#weight in kg: 57.5 and in pounds: 126.50000000000001
+weight_kg = 100.0
+print('weight in kg:', weight_kg, 'and weight in pounds is:', weight_lb)
+#weight in kg: 100.0 and weight in pounds is: 126.50000000000001
+
+
+
+#In jupyter notebook you can type whos and it will bring up all of the variables you've already made.
+
+
+
+import numpy
+data = numpy.loadtxt('inflammation-02.csv', delimiter=',')
+print(data)
+#[[ 0.  0.  0. ...,  1.  1.  0.]
+# [ 0.  0.  2. ...,  0.  2.  1.]
+# [ 0.  1.  2. ...,  0.  2.  1.]
+# ...,
+# [ 0.  0.  2. ...,  0.  2.  0.]
+# [ 0.  0.  0. ...,  2.  2.  0.]
+# [ 0.  1.  2. ...,  3.  2.  0.]]
+element = 'oxygen'
+print('first character:', element[0])
+#first character: o
+print('first character:', element[1])
+#first character: x
+print('second char', element[1])
+#second char x
+#print('second char', element[6])
+#Traceback (most recent call last):
+#  File "<stdin>", line 1, in <module>
+#IndexError: string index out of range
+print('last char', element[-1])
+#last char n
+print('first 3 chars:', element[0:3])
+#first 3 chars: oxy
+
+print(element[4:])
+#en
+print(element[:])
+#oxygen
+print('first value in data', data[0, 0])
+#first value in data 0.0
+
+
+print('middle value in data:', data[30, 20])
+#middle value in data: 7.0
+
+print(data[0:4, 0:10])
+#[[ 0.  0.  0.  1.  3.  4.  6.  5.  2.  7.]
+# [ 0.  0.  2.  2.  4.  2.  1.  7.  5.  7.]
+# [ 0.  1.  2.  3.  2.  1.  4.  1.  8.  7.]
+# [ 0.  0.  0.  0.  1.  2.  4.  7.  3.  5.]]
+
+print(data[5:10, :10])
+#[[ 0.  0.  1.  3.  4.  4.  2.  2.  6.  3.]
+# [ 0.  1.  0.  3.  2.  3.  2.  2.  4.  6.]
+# [ 0.  1.  2.  1.  4.  1.  2.  7.  2.  2.]
+# [ 0.  0.  1.  2.  2.  1.  4.  2.  7.  4.]
+# [ 0.  1.  1.  1.  4.  2.  1.  3.  5.  3.]]
+
+doubledata = data * 2.0
+print('original:')
+print(data[:3, 36:])
+print('doubledata:')
+print(doubledata[:3,36])
+
+tripledata = doubledata + data
+
+
+print(data[0:4, 0:10])
+#[[ 0.  0.  0.  1.  3.  4.  6.  5.  2.  7.]
+# [ 0.  0.  2.  2.  4.  2.  1.  7.  5.  7.]
+# [ 0.  1.  2.  3.  2.  1.  4.  1.  8.  7.]
+# [ 0.  0.  0.  0.  1.  2.  4.  7.  3.  5.]]
+print(data[5:10, :10])
+#[[ 0.  0.  1.  3.  4.  4.  2.  2.  6.  3.]
+# [ 0.  1.  0.  3.  2.  3.  2.  2.  4.  6.]
+#[ 0.  1.  2.  1.  4.  1.  2.  7.  2.  2.]
+# [ 0.  0.  1.  2.  2.  1.  4.  2.  7.  4.]
+# [ 0.  1.  1.  1.  4.  2.  1.  3.  5.  3.]]
+#doubledata = data * 2.0
+#print('original:')
+original:
+#print(data[:3, 36:])
+#[[ 2.  1.  1.  0.]
+# [ 2.  0.  2.  1.]
+# [ 4.  0.  2.  1.]]
+print('doubledata:')
+#doubledata:
+print(doubledata[:3,36])
+#[ 4.  4.  8.]
+
+
+
+
+
+print('tripledata:')
+print(tripledata[:3, 36:])
+
+print('tripledata:')
+#tripledata:
+print(tripledata[:3, 36:])
+#[[  6.   3.   3.   0.]
+# [  6.   0.   6.   3.]
+# [ 12.   0.   6.   3.]]
+
+
+
+
+
+print(numpy.mean(data))
+#5.99083333333
+
+
+
+maxval = numpy.max(data)
+minval = numpy.min(data)
+stdval = numpy.std(data)
+#########STD = STANDARD DEVIATION!!!!!!!!!!!! USE THIS!!!!!!!!!!
+print('maximum inflammation:', maxval)
+print('minimum inflammation', minval)
+print('standard deviation value', stdval)
+
+#maximum inflammation: 20.0
+#minimum inflammation 0.0
+#standard deviation value 4.52823541484
+
+#when you type help and numpy you specify what you need help on (max) and it will pull up a bunch of stuff im not copy and pasting.
+#help(numpy.max)
+
+
+
+
+patient0=data[0,:]
+print(patient0.max())
+print(numpy.mean(data, axis=0))
+#[  0.           0.5          0.93333333   1.58333333   2.63333333
+#   2.66666667   3.58333333   4.13333333   4.78333333   5.63333333
+#   6.21666667   6.5          7.3          7.56666667   8.08333333   9.3
+#   9.43333333  10.05        10.45        11.51666667  12.71666667
+#  11.11666667  10.8         10.          10.23333333   8.86666667
+#   8.03333333   8.2          7.6          6.43333333   6.13333333   5.55
+#   4.96666667   3.66666667   3.83333333   2.98333333   2.46666667   1.5
+#   1.13333333   0.53333333]
+
+print(numpy.mean(data, axis=0).shape)
+#(40,)
+
+
+print(numpy.mean(data, axis=1))
+#[ 6.35   5.7    5.9    5.325  6.05   5.675  6.25   5.425  5.35   5.675
+#  5.95   6.375  5.475  6.075  6.35   5.725  6.025  6.025  6.     5.975
+#  6.15   5.975  6.125  6.55   6.25   6.725  5.325  5.15   6.     6.3    6.25
+#  5.8    5.475  6.125  6.075  5.4    6.075  5.45   6.175  6.2    6.175  6.1
+#  5.725  6.375  6.025  5.8    5.8    6.825  6.25   5.35   5.575  6.     5.1
+#  5.475  6.9    6.025  6.025  6.55   7.2    6.925]
+
+
+
+
+import matplotlib.pyplot
+image = matplotlib.pyplot.imshow(data) #imshow shows a HEAT MAP
+matplotlib.pyplot.show()
+#^^^^^Shows us a handy dandy little chart visualizing the data, and then some. It has COLOURS.
+
+
+aveinfl=numpy.mean(data, axis=0)
+aveplot=matplotlib.pyplot.plot(aveinfl) #PLOT shows a LINE GRAPH
+matplotlib.pyplot.show()
+#THIS one shows a line graph...
+
+maxplot=matplotlib.pyplot.plot(numpy.max(data, axis=0))
+matplotlib.pyplot.show()
+#this one showed a straight line
+
+minplot=matplotlib.pyplot.plot(numpy.min(data, axis=0))
+matplotlib.pyplot.show()
+#this showed a funky steps style pyramid
+
+stdplot=matplotlib.pyplot.plot(numpy.std(data, axis=0))
+matplotlib.pyplot.show()
+#shows the standard deviation plot
+
+
+matplotlib.pyplot.figure() #For multiple plots at the same time
+#OR
+matplotlib.pyplot.imshow() #for heat maps
+#OR
+matplotlib.pyplot.show() #for line plots
+
+
+#to show multiple plots at the same time
+
+
+
+
+###################################################
+###################################################
+
+
+
+
+
+#SHOWS WHOLE PROCESS TO DO FIGURE AKA MULTIPLE PLOTS AT THE SAME TIME#
+
+data = numpy.loadtxt(fname = 'inflammation-03.csv', delimiter=',')
+fig = matplotlib.pyplot.figure(figsize=(10.0,3.0))
+axes1=fig.add_subplot(1, 3, 1)
+axes2=fig.add_subplot(1, 3, 2)
+axes3=fig.add_subplot(1, 3, 3)
+axes1.set_ylabel('average')
+axes1.plot(numpy.mean(data, axis=0))
+axes2.set_ylabel('max')
+axes2.plot(numpy.max(data, axis=0))
+axes3.set_ylabel('min')
+axes3.plot(numpy.min(data, axis=0))
+fig.tight_layout()
+matplotlib.pyplot.show()
+
+
+
+
+
+
+##############################################
+########BREAK#################################
+##############################################
+
+
+
+##############LOOPS!!!!!!!!!!!!!!!
+
+
+
+
+#To print each letter individually, separate lines
+word ='lead'
+for x in word:
+    print(x)
+#l
+#e
+#a
+#d
+
+
+#counter!!!!!
+length = 0
+for vowel in 'aeiou':
+    length = length + 1
+print('There are', length, 'vowels')
+#There are 5 vowels
+
+#built in length function
+len('aeiou')
+#5
+
+len(data)
+#60
+
+
+letter ='z'
+for letter in 'abc':
+    print(letter)
+print('after the loop, letter is', letter)
+
+#a
+#b
+#c
+#after the loop, letter is c
+
+
+#range can take up to 3 arguments
+for i in range (1,4):
+    print(i)
+#1
+#2
+#3
+
+
+#this is saying for between 1-10, print every second number
+for i in range (1, 10, 2):
+    print(i)
+
+
+
+
+
+
+#Rhianna's way to get 125
+for i in range():
+    print(5*5*5)
+
+#her way to get 125
+result = 1
+for i in range(0,3):
+    result = result *5
+print(result)
+
+
+
+
+#Rhianna's way to get newton backwards
+word = 'notweN'
+for x in word:
+    print(x)
+
+#her way to get newton backwards
+newstring = ''
+oldstring = 'Newton'
+for char in oldstring:
+    newstring = char + newstring
+print(newstring)
+
+
+
+
+
+
+
+
+
+
+############################################
+##################LISTS#####################
+############################################
+
+
+
+
+
+
+
+
+
+odds = [1,3,5,7]
+print('odds are:', odds)
+#odds are: [1, 3, 5, 7]
+
+print('first and last:', odds[0], odds[-1])
+#first and last: 1 7
+
+
+for number in odds:
+    print(number)
+
+
+
+#To fix something in a list...Darwing to Darwin
+names = ['Curie', 'Darwing', 'Turing']
+print('Original names:', names)
+names[1] = 'Darwin'
+print('final values:', names)
+#Original names: ['Curie', 'Darwing', 'Turing']
+#final values: ['Curie', 'Darwin', 'Turing']
+
+
+
+
+salsa = ['peppers', 'onions', 'cilantro', 'tomatoes']
+mySalsa = salsa
+salsa[0]='hot peppers'
+print('Ingredients in my salsa', mySalsa)
+#Ingredients in my salsa ['hot peppers', 'onions', 'cilantro', 'tomatoes']
+
+
+mixture = ['Curie', 4, print]
+for item in mixture:
+    print(type(item))
+
+#<class 'str'>
+#<class 'int'>
+#<class 'builtin_function_or_method'>
+
+
+
+x = [['pepper', 'zucchini', 'onion'], ['cabbage', 'lettuce'], ['red', 'blue']]
+print(x[0][0])
+#pepper
+
+#to add something to the back of an existing list
+odds.append(11)
+print(odds)
+
+
+#Use a for-loop to convert the string “hello” into a list of letters:
+#["h", "e", "l", "l", "o"]
+#Hint: Start by creating an empty list like this:
+#my_list = []
+
+
+#to print 'hello' string in a LIST
+mylist=[]
+for char in 'hello':
+    mylist.append(char)
+    print(mylist)
+
+#del to delete a certain letter or section in a list
+del odds[0]
+print(odds)
+#[3, 5, 7, 11]
+
+
+
+######TO REVERSE LIST ORDER BACKWARDS
+odds.reverse()
+print(odds)
+
+x = ['blue', 'green', 'red', 'yellow']
+x.reverse()
+print(x)
+
+
+
+
+
+
+
+
+
+
+
+
+
+#####################################################
+#######################DAY TWO#######################
+#####################################################
+
+
+
+
+
+
+#######Morning sesh starting with Git
+
+##RHIANNA UPDATE YOUR GIT VERSION
+
+
+
+
+
+
+git config --global user.name "Rhianna LaValla"
+git config --global user.email "rhiannalavalla@gmail.com"
+git config --global color.ui "auto"
+git config --global core.autocrlf input
+git config --global core.editor "nano -w"
+
+
+mkdir planets
+git init        #git init (has the ability to) track everything after this command
+ls -a
+git status     #Use git status to see the changes made, and to make sure it's tracking.
+
+
+#DO NOT MAKE A REPOSITORY IN A REPOSITORY!!!!!!!!
+#It's already tracking the upper repository!!!! You'll dulicate it!!!
+##### NO NESTING.
+
+
+#You CANNOT use cd to go into a file. ONLY a folder.
+
+
+clear
+
+#CLEAR CLEARS SHIT OMG
+
+
+
+so
+
+
+git status
+
+$ git status
+On branch master
+
+Initial commit
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	mars.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+
+#nothing is being tracked yet!
+
+
+#use git add X to track
+
+
+git add mars.txt        #MUST use git add to "put it in the envelope"
+
+
+
+$ git status
+On branch master
+
+Initial commit
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+
+	new file:   mars.txt
+
+
+#but it's not SAVING yet.
+#use git commit -m " idfjdjf" to SAVE that snapshot
+
+
+$ git commit -m "Start notes on Mars as a base."
+[master (root-commit) 682a978] Start notes on Mars as a base.
+ 1 file changed, 1 insertion(+)
+ create mode 100644 mars.txt
+
+
+$ git status
+On branch master
+nothing to commit, working tree clean
+
+
+
+#use git log to see current commits with messages, newest one on top.
+$ git log
+commit 682a978ba6c0f44d44109dd64a820bf027d06c68     #this is the "fingerprint"
+Author: Rhianna LaValla <rhiannalavalla@gmail.com>
+Date:   Sat Jan 27 09:50:11 2018 -0600
+
+    Start notes on Mars as a base.
+
+
+
+$ ls
+mars.txt
+$ nano mars.txt
+$ cat mars.txt           #cat shows the contents of the file? I think?
+Cold and dry, but everything is my favourite colour.
+The two moons may be a problem for Wolfman.
+
+
+
+
+
+#ok this copy and pasted really weird but use git diff to see what changes have been made.
+    $ git diff
+    diff - -git
+    a / mars.txt
+    b / mars.txt
+    index
+    e8bc1a5..e7555e7
+    100644
+    --- a / mars.txt   #past version
+    +++ b / mars.txt   #current version
+
+
+    @ @
+
+
+    -1 + 1, 2 @ @
+    Cold and dry, but
+    everything is my
+    favourite
+    colour.
++The two moons may be a problem for Wolfman.   #the + shows what changed
+    $
+
+
+$ git add mars.txt      #added it to envelope and showed it what we wanted to save
+$ git commit -m "Add concerns about effects of Mar's moons on Wolfman"   #actually told it to save
+[master 91e5296] Add concerns about effects of Mar's moons on Wolfman
+ 1 file changed, 1 insertion(+)
+$
+
+nano mars.txt #added more stuff
+
+$ git add mars.txt
+
+#IF you do git diff at this point, it won't show anything because you already staged the info with git add.
+# you need to use git diff --staged
+
+
+git diff --staged
+diff --git a/mars.txt b/mars.txt
+index e7555e7..71fc7c1 100644
+--- a/mars.txt
++++ b/mars.txt
+@@ -1,2 +1,3 @@
+ Cold and dry, but everything is my favourite colour.
+ The two moons may be a problem for Wolfman.
++But the Mummy will appreciate the lack of humidity"
+$
+
+
+git dif --color-words #will show colors and such
+
+$ git log -1    #you could be dealing with a repository that has thousands of lines, with log and a number you limit it to that number.
+commit c4d585584735df03d70a90b20ebcf82f20d72837
+Author: Rhianna LaValla <rhiannalavalla@gmail.com>
+Date:   Sat Jan 27 10:08:41 2018 -0600
+
+    Discuss concerns about mars climate for mummy
+
+
+$ git log --oneline   #--oneline shows everything on ONE LINE. Handy for showing a shitload of info
+c4d5855 Discuss concerns about mars climate for mummy
+91e5296 Add concerns about effects of Mar's moons on Wolfman
+682a978 Start notes on Mars as a base.
+$
+
+
+
+
+$ git log -h    #Shows SOME options for log viewing
+usage: git log [<options>] [<revision-range>] [[--] <path>...]
+   or: git show [<options>] <object>...
+
+    -q, --quiet           suppress diff output
+    --source              show source
+    --use-mailmap         Use mail map file
+    --decorate[=...]      decorate options
+    -L <n,m:file>         Process line range n,m in file, counting from 1
+
+$
+
+
+
+#####Git does NOT care about empty directories. There is no info in it, git doesn't care about it
+
+
+####EX.
+
+$ ls
+mars.txt
+$ mkdir directory
+$ ls
+directory	mars.txt
+$ git status
+On branch master
+nothing to commit, working tree clean
+$ cd directory/
+$ touch .gitkeep
+$ git status
+On branch master
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	./
+
+nothing added to commit but untracked files present (use "git add" to track)
+$
+
+
+rm .gitkeep   #removed that file
+
+rmdir directory   #to remove a whole directory
+
+git add . #will add EVERYTHING to the staging area. Still need to git commit -m "X" to save it.
+
+
+
+
+
+#EXAMPLES
+
+
+$ touch one.txt
+$ touch two.txt
+$ touch three.txt
+$ ls
+mars.txt	one.txt		three.txt	two.txt
+$ git status
+On branch master
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	one.txt
+	three.txt
+	two.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+$ git add .
+$ git status
+On branch master
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+	new file:   one.txt
+	new file:   three.txt
+	new file:   two.txt
+
+$ git reset
+$ ls
+mars.txt	one.txt		three.txt	two.txt
+$ git reset HEAD one.txt two.txt three.txt
+$ ls
+mars.txt	one.txt		three.txt	two.txt
+$ git status
+On branch master
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	one.txt
+	three.txt
+	two.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+$ rm one.txt two.txt three.txt
+$ git status
+On branch master
+nothing to commit, working tree clean
+$
+
+
+
+
+git diff HEAD mars.txt   #SPECIFIC FILE
+diff --git a/mars.txt b/mars.txt
+index 71fc7c1..c344f19 100644
+--- a/mars.txt
++++ b/mars.txt
+@@ -1,3 +1,4 @@
+ Cold and dry, but everything is my favourite colour.
+ The two moons may be a problem for Wolfman.
+ But the Mummy will appreciate the lack of humidity"
++Change
+
+
+$ git diff HEAD~1 mars.txt     #Shows one version/change to the ~1 prior
+diff --git a/mars.txt b/mars.txt
+index e7555e7..c344f19 100644
+--- a/mars.txt
++++ b/mars.txt
+@@ -1,2 +1,4 @@
+ Cold and dry, but everything is my favourite colour.
+ The two moons may be a problem for Wolfman.
++But the Mummy will appreciate the lack of humidity"
++Change
+$
+
+
+
+
+
+
+
+
+
+
+
+
+
+#another example but with a word doc.
+
+$ touch newfile.docx
+$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   mars.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	newfile.docx
+
+no changes added to commit (use "git add" and/or "git commit -a")
+$ git add newfile.docx
+$ git status
+On branch master
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+	new file:   newfile.docx
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   mars.txt
+
+$ newfile.docx
+-bash: newfile.docx: command not found
+$ word newfile.docx
+-bash: word: command not found
+$ git status
+On branch master
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+	new file:   newfile.docx
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   mars.txt
+	modified:   newfile.docx
+
+$ git commit newfile.docx mars.txt
+[master 051f130] New changes
+ 2 files changed, 1 insertion(+)
+ create mode 100644 newfile.docx
+$ git status
+On branch master
+nothing to commit, working tree clean
+$ git lo
+git: 'lo' is not a git command. See 'git --help'.
+
+Did you mean one of these?
+	log
+	lg
+	ll
+$ git log
+commit 051f13061e3c3f0daedcb6f80f591cd6a8cd346d
+Author: Rhianna LaValla <rhiannalavalla@gmail.com>
+Date:   Sat Jan 27 10:53:30 2018 -0600
+
+    New changes
+
+commit c4d585584735df03d70a90b20ebcf82f20d72837
+Author: Rhianna LaValla <rhiannalavalla@gmail.com>
+Date:   Sat Jan 27 10:08:41 2018 -0600
+
+    Discuss concerns about mars climate for mummy
+
+commit 91e52961474a02219e087fd43bf9ed407e0b5102
+Author: Rhianna LaValla <rhiannalavalla@gmail.com>
+Date:   Sat Jan 27 10:02:26 2018 -0600
+
+    Add concerns about effects of Mar's moons on Wolfman
+
+commit 682a978ba6c0f44d44109dd64a820bf027d06c68
+Author: Rhianna LaValla <rhiannalavalla@gmail.com>
+Date:   Sat Jan 27 09:50:11 2018 -0600
+
+    Start notes on Mars as a base.
+$ git status
+On branch master
+nothing to commit, working tree clean
+$ ls
+mars.txt	newfile.docx
+$ git log --oneline
+051f130 New changes
+c4d5855 Discuss concerns about mars climate for mummy
+91e5296 Add concerns about effects of Mar's moons on Wolfman
+682a978 Start notes on Mars as a base.
+$ git log --oneline newfile.docx
+051f130 New changes
+$
+
+
+
+
+
+
+###We can put things back the way they were by using git checkout:
+
+$ git checkout HEAD mars.txt
+$ cat mars.txt
+Cold and dry, but everything is my favorite color
+The two moons may be a problem for Wolfman
+But the Mummy will appreciate the lack of humidity
+As you might guess from its name, git checkout checks out (i.e., restores) an old version of a file. In this case, we’re telling Git that we want to recover the version of the file recorded in HEAD, which is the last saved commit. If we want to go back even further, we can use a commit identifier instead:
+
+$ git checkout f22b25e mars.txt
+$ cat mars.txt
+Cold and dry, but everything is my favorite color
+$ git status
+# On branch master
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+# Changes not staged for commit:
+#   (use "git add <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#	modified:   mars.txt
+#
+no changes added to commit (use "git add" and/or "git commit -a")
+Notice that the changes are on the staged area. Again, we can put things back the way they were by using git checkout:
+
+$ git checkout HEAD mars.txt
+
+
+
+
+#######################################################
+####http://swcarpentry.github.io/git-novice/05-history/
+####^^^^^^ Instructions for alla this
+
+#not entirely sure I understand checkout. Seems to be a way to revert a change without doing it
+# in the document, but actually in the code. so there aren't two copies.
+
+
+
+#ok made a change with nano mars.txt
+
+then did git status
+
+$ git checkout -- mars.txt
+#checkout gets rid of the last version
+
+
+#lost at the checkout/revert flags....
+
+git help revert   #you can do any git command with help and it will show you options
+
+
+
+#### if you check out of a version wihtout staging it YOUR CHANGES ARE GOOOONNNNEEEEE.
+
+##ADD then COMMIT IMMEDIATELY to NOT LOSE SHIT.
+
+git status ####Do this constantly to ensure you have those changes.
+
+
+
+#to view history fromo ONLY one file,
+
+git log --oneline mars.txt #oneline just sticks it on..one line.
+
+
+
+
+
+
+########################################
+########################################
+########################################
+#################GITHUB#################
+########################################
+########################################
+########################################
+
+
+
+####…or create a new repository on the command line....the following is what pops up
+
+echo "# planets" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/rlavalla/planets.git
+git push -u origin master
+
+
+#####…or push an existing repository from the command line
+git remote add origin https://github.com/rlavalla/planets.git
+git push -u origin master
+
+
+
+
+
+
+
+#######NEW ONLINE REPOSITORY, ADDING AND CHANGING FROM LAPTOP TO ONLINE.
+
+
+$ git remote add origin https://github.com/rlavalla/planets.git
+$ git remote -v
+origin	https://github.com/rlavalla/planets.git (fetch)
+origin	https://github.com/rlavalla/planets.git (push)
+
+
+$ git push origin master     #TO PUSH your laptop content to online repository
+Username for 'https://github.com': rhiannalavalla@gmail.com
+Password for 'https://rhiannalavalla@gmail.com@github.com':
+Counting objects: 16, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (12/12), done.
+Writing objects: 100% (16/16), 11.56 KiB | 0 bytes/s, done.
+Total 16 (delta 4), reused 0 (delta 0)
+remote: Resolving deltas: 100% (4/4), done.
+To https://github.com/rlavalla/planets.git
+ * [new branch]      master -> master
+
+
+
+$ git pull origin master        #Too pull info from online repository IF it was changed, to add it to your laptop repository
+From https://github.com/rlavalla/planets
+ * branch            master     -> FETCH_HEAD
+Already up-to-date.
+$
+
+
+#commit saves it locally, but push saves it online in github.
+# BUT to push ONLINE you have to commit it first.
+
+
+
+git pull origin master   #this should work IF you're already added and logged in to that repository...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#####################################################################
+#######################python afternoon shit########################
+#####################################################################
+
+
+
+
+
+
+import glob
+print(glob.glob('inflammation*.csv'))
+
+
+
+import numpy
+import matplotlib.pyplot
+filenames = sorted(glob.glob('inflammation*.csv'))
+filenames = filenames[:3]
+for f in filenames:
+    print(f)
+    data = numpy.loadtxt(fname=f, delimiter = ',')
+    fig = matplotlib.pyplot.figure(figsize=(10.0, 3.0))
+    axes1 = fig.add_subplot(1, 3, 1)
+    axes2 = fig.add_subplot(1, 3, 2)
+    axes3 = fig.add_subplot(1, 3, 3)
+    axes1.set_ylabel('average')
+    axes1.plot(numpy.mean(data, axis=0))
+    axes2.set_ylabel('max')
+    axes2.plot(numpy.max(data, axis=0))
+    axes3.set_ylabel('min')
+    axes3.plot(numpy.min(data, axis=0))
+    fig.tight_layout()
+    matplotlib.pyplot.show()
+
+######I got a unicode error BUT its supposed to be a shitload of charts.
+
+
+num = 37
+if num > 100:
+    print('greater')
+else:
+    print('not greater')
+print('done')
+
+
+
+
+num = -3
+if num > 0:
+    print(num, "is positive")
+elif num == 0:
+    print(num, "is zero")
+else:
+    print(num, "is less than 0")
+
+
+
+
+Such bored batman.
+
+
+
+
+if (1>0) and (-1>0):
+    print('both parts are true')
+else:
+    print('well fuck.')
+
+
+
+if 'word':
+    print('this evaluates true')
+
+
+
+
+if not '':
+    print("didn't enter any data")
+
+
+
+
+
+
+
+
+
+#?????????
+
+
+
+if numpy.max(data, axis =0)[0] == 0 and numpy.max(data, axis=0)[20] == 10:
+    print('suspicious')
+elif numpy.sum(numpy.min(data, axis=0)) == 0:
+    print('min add up to zero')
+else:
+    print('seems ok.')
+
+
+
+
+
+#???????????
+
+count = 0
+word = ('aeiou')
+sentence = 'blue green yellow purple'
+for x in sentence:
+    if word in sentence:
+        count = count + 1
+    else:
+        print('there are', + str(count))
+
+
+
+
+
+
+
+
+
+
+
+
+
+def fartokel(temp):
+    return((temp - 32) * (5/9)) + 273.15
+
+fartokel(35)
+#274.81666666666666
+
+
+
+
+
+
+
+##############################################
+##################BREAK#######################
+##############################################
+
+
+
+
+
+
+#Afternoon python run programs and create them from cmd line
+
+
+
+
+
+
+
+
+
+#####################OK THIS IS ACTUALLY USEFUL BUT IDK HOW IT WORKS.
+#This gives the averages of EACH line of a file.
+
+#https://docs.python.org/3/howto/argparse.html
+
+#IN a nano txt file...this only does ONE file
+
+import sys
+import numpy
+
+def main():
+        script = sys.argv[0]
+        filename = sys.argv[1]
+        data = numpy.loadtxt(filename, delimiter=',')
+        for m in numpy.mean(data, axis=1):
+                print(m)
+
+if __name__ == '__main__':
+        main()
+
+$ python argv_list.py inflammation-04.csv
+
+#prints a fuck ton of numbersssss I think they're the averages from each line???
+
+
+
+
+
+
+
+########This one does multiple files.
+import sys
+import numpy
+
+def main():
+        script = sys.argv[0]
+        for filename in sys.argv[1:]:
+                data = numpy.loadtxt(filename, delimiter=',')
+                for m in numpy.mean(data, axis=1):
+                        print(m)
+
+if __name__ == '__main__':
+        main()
+
+
+
+
+$ python argv_list.py small-*.csv
+
+
+
+
+
+
+
+import sys
+import numpy
+
+def main():
+        script = sys.argv[0]
+        action = sys.argv[1]
+        filenames = sys.argv[2:]
+        for filename in filenames:
+                data = numpy.loadtxt(filename, delimiter=',')
+                if action == '--min':
+                        values = numpy.min(data, axis=1)
+                elif action == '--mean':
+                        values = numpy.mean(data, axis=1)
+                elif action == '--max':
+                        values = numpy.max(data, axis=1)
+
+                for m in values:
+                        print(m)
+
+
+if __name__ == '__main__':
+        main()
+
+
+$ python argv_list.py --max small-*.csv   #can do either --max, --min, or --mean for ANY number of files
+
+
+
+
+
+
+
+import numpy
+
+def main():
+        script = sys.argv[0]
+        action = sys.argv[1]
+        filenames = sys.argv[2:]
+        assert action in ['--min', '--mean', '--max'], \
+                'Action is not one of --min --mean or --max:' + action
+        for f in filenames:
+                process(f, action)
+    ########IDFK what assert does but it stops the program from running
+                # through the whole thing by having it above the elif section below.
+
+def process(filename, action):
+        data = numpy.loadtxt(filename, delimiter=',')
+        if action == '--min':
+                values = numpy.min(data, axis=1)
+        elif action == '--mean':
+                values = numpy.mean(data, axis=1)
+        elif action == '--max':
+                values = numpy.max(data, axis=1)
+
+        for m in values:
+                print(m)
+
+
+if __name__ == '__main__':
+        main()
+
+$ python argv_list.py --ma small-*.csv
+Traceback (most recent call last):
+  File "argv_list.py", line 27, in <module>
+    main()
+  File "argv_list.py", line 9, in main
+    'Action is not one of --min --mean or --max:' + action
+AssertionError: Action is not one of --min --mean or --max:--ma
+
+
+
+
+
+
+
+
+#####Standard input whatever that is.
+
+import sys
+
+count=0
+for line in sys.stdin:
+        count += 1
+
+print(count, 'lines instandard input')
+
+
+
+$ python newprogram.txt < small-01.csv
+
+
+
+
+
+
+
+
+
+
+#moarrrr but with standard input stuff
+
+
+import sys
+import numpy
+
+def main():
+        script = sys.argv[0]
+        action = sys.argv[1]
+        filenames = sys.argv[2:]
+        assert action in ['--min', '--mean', '--max'], \
+                'Action is not one of --min --mean or --max:' + action
+        if len(filenames) == 0:
+                process(sys.stdin, action)
+        else:
+                for f in filenames:
+                        process(f, action)
+
+def process(filename, action):
+        data = numpy.loadtxt(filename, delimiter=',')
+        if action == '--min':
+                values = numpy.min(data, axis=1)
+        elif action == '--mean':
+                values = numpy.mean(data, axis=1)
+        elif action == '--max':
+                values = numpy.max(data, axis=1)
+
+        for m in values:
+                print(m)
+
+
+if __name__ == '__main__':
+        main()
+
+
+
+
+
+

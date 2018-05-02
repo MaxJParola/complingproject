@@ -1,0 +1,77 @@
+Python 3.6.1 |Anaconda 4.4.0 (x86_64)| (default, May 11 2017, 13:04:09) 
+[GCC 4.2.1 Compatible Apple LLVM 6.0 (clang-600.0.57)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import os
+>>> import tarfile
+>>> from contextlib import closing
+>>> try:
+...     from urllib import urlopen
+... except ImportError:
+...     from urllib.request import urlopen
+... 
+>>> URL = ("http://www.cs.cornell.edu/people/pabo/"
+...        "movie-review-data/review_polarity.tar.gz")
+>>> 
+>>> ARCHIVE_NAME = URL.rsplit('/', 1)[1]
+>>> DATA_FOLDER = "txt_sentoken"
+>>> if not os.path.exists(DATA_FOLDER):
+...     if not os.path.exists(ARCHIVE_NAME):
+...             print("Downloading dataset from %s (3 MB)" % URL)
+...             opener = urlopen(URL)
+...             with open(ARCHIVE_NAME, 'wb') as archive:
+...                     archive.write(opener.read())
+... 
+Downloading dataset from http://www.cs.cornell.edu/people/pabo/movie-review-data/review_polarity.tar.gz (3 MB)
+3127238
+>>> if not os.path.exists(DATA_FOLDER):
+...     if not os.path.exists(ARCHIVE_NAME):
+...             print("Downloading dataset from %s (3 MB)" % URL)
+...             opener = urlopen(URL)
+...             with open(ARCHIVE_NAME, 'wb') as archive:
+...                     archive.write(opener.read())
+...     print("Decompressing %s" % ARCHIVE_NAME)
+...     with closing(tarfile.open(ARCHIVE_NAME, "r:gz")) as archive:
+...             archive.extractall(path='.')
+...     os.remove(ARCHIVE_NAME)
+... 
+Decompressing review_polarity.tar.gz
+>>> print(review_polarity.tar.gz)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'review_polarity' is not defined
+>>> if not os.path.exists(DATA_FOLDER):
+...     if not os.path.exists(ARCHIVE_NAME):
+...     print("Decompressing %s" % ARCHIVE_NAME)
+  File "<stdin>", line 3
+    print("Decompressing %s" % ARCHIVE_NAME)
+        ^
+IndentationError: expected an indented block
+>>> if not os.path.exists(DATA_FOLDER):
+...     if not os.path.exists(ARCHIVE_NAME):
+...             print("Downloading dataset from %s (3 MB)" % URL)
+...             opener = urlopen(URL)
+...             with open(ARCHIVE_NAME, 'wb') as archive:
+...                     archive.write(opener.read())
+...     print("Decompressing %s" % ARCHIVE_NAME)
+... 
+>>> print(review_polarity.tar.gz)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'review_polarity' is not defined
+>>> import sys
+>>> from sklearn.feature_extraction.text import TfidfVectorizer
+>>> from sklearn.svm import LinearSVC
+>>> from sklearn.pipeline import Pipeline
+>>> from sklearn.model_selection import GridSearchCV
+>>> from sklearn.datasets import load_files
+>>> from sklearn.model_selection import train_test_split
+>>> from sklearn import metrics
+>>> if __name__ == "__main__":
+...     movie_reviews_data_folder = sys.argv[1] #RANGE?
+...     dataset = load_files(movie_reviews_data_folder, shuffle=False)
+...     print("n_samples: %d" % len(dataset.data))
+... 
+Traceback (most recent call last):
+  File "<stdin>", line 2, in <module>
+IndexError: list index out of range  #Line 70 error
+>>> 
