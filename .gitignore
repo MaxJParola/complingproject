@@ -10,19 +10,19 @@ __pycache__/
 
 # Distribution / packaging
 .Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
+build\
+develop-eggs\
+dist\
+downloads\
+eggs\
+.eggs\
+lib\
+lib64\
+parts\
+sdist\
+var\
+wheels\
+*.egg-info\
 .installed.cfg
 *.egg
 MANIFEST
@@ -38,16 +38,16 @@ pip-log.txt
 pip-delete-this-directory.txt
 
 # Unit test / coverage reports
-htmlcov/
-.tox/
+htmlcov\
+.tox\
 .coverage
 .coverage.*
 .cache
 nosetests.xml
 coverage.xml
 *.cover
-.hypothesis/
-.pytest_cache/
+.hypothesis\
+.pytest_cache\
 
 # Translations
 *.mo
@@ -86,11 +86,11 @@ celerybeat-schedule
 # Environments
 .env
 .venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
+env\
+venv\
+ENV\
+env.bak\
+venv.bak\
 
 # Spyder project settings
 .spyderproject
@@ -100,16 +100,17 @@ venv.bak/
 .ropeproject
 
 # mkdocs documentation
-/site
+\site
 
 # mypy
-.mypy_cache/
+.mypy_cache\
 
 test.txt
 
-.idea/complingproject.iml
-.idea/misc.xml
-.idea/modules.xml
-.idea/workspace.xml
+.idea\
+.idea\complingproject.iml
+.idea\misc.xml
+.idea\modules.xml
+.idea\workspace.xml
 MasterDataFile.csv
 
