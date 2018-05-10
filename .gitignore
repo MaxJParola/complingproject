@@ -115,3 +115,5 @@ test.txt
 MasterDataFile.csv
 MasterCleanPostCoded.csv
 MasterCleanCommentCoded.csv
+MasterDataFileVotes.csv
+CommentCodedVotes.csv
